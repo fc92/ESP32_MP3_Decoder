@@ -17,7 +17,6 @@
 #include "driver/i2s.h"
 #include "MerusAudio.h"
 
-#include "audio_player.h"
 #include "audio_renderer.h"
 
 #define TAG "renderer"
@@ -30,12 +29,12 @@ static QueueHandle_t i2s_event_queue;
 static void init_i2s(renderer_config_t *config)
 {
     i2s_mode_t mode = I2S_MODE_MASTER | I2S_MODE_TX;
-    i2s_comm_format_t comm_fmt = I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB;
+    i2s_comm_format_t comm_fmt = I2S_COMM_FORMAT_STAND_I2S | I2S_COMM_FORMAT_STAND_MSB;
 
     if(config->output_mode == DAC_BUILT_IN)
     {
         mode = mode | I2S_MODE_DAC_BUILT_IN;
-        comm_fmt = I2S_COMM_FORMAT_I2S_MSB;
+        comm_fmt = I2S_COMM_FORMAT_STAND_MSB;
     }
 
     if(config->output_mode == PDM)

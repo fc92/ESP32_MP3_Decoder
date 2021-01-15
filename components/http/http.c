@@ -4,7 +4,7 @@
 #include "freertos/event_groups.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
-#include "esp_event_loop.h"
+#include "esp_event.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
 #include "errno.h"
@@ -30,7 +30,7 @@ int icymeta_interval = 0;
  * @brief simple http_get
  * see https://github.com/nodejs/http-parser for callback usage
  */
-int http_client_get(char *uri, http_parser_settings *callbacks, void *user_data)
+int http_client_get(const char *uri, http_parser_settings *callbacks, void *user_data)
 {
     url_t *url = url_parse(uri);
 

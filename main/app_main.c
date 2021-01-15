@@ -8,7 +8,7 @@
 #include "freertos/event_groups.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
-#include "esp_event_loop.h"
+#include "esp_event.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
 #include "http.h"
@@ -43,7 +43,12 @@
 
 static void init_hardware()
 {
-    nvs_flash_init();
+    esp_err_t err = nvs_flash_init();
+    if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        err = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(err);
 
     // init UI
     // ui_init(GPIO_NUM_32);
@@ -81,7 +86,7 @@ static renderer_config_t *create_renderer_config()
     renderer_config_t *renderer_config = calloc(1, sizeof(renderer_config_t));
 
     renderer_config->bit_depth = I2S_BITS_PER_SAMPLE_16BIT;
-    renderer_config->i2s_num = I2S_NUM_0;
+    renderer_config->i2s_num = I2S_NUM_1;
     renderer_config->sample_rate = 44100;
     renderer_config->sample_rate_modifier = 1.0;
     renderer_config->output_mode = AUDIO_OUTPUT_MODE;

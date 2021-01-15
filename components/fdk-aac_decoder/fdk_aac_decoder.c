@@ -16,9 +16,11 @@
 #include "driver/i2s.h"
 
 #include "common_buffer.h"
+#include "common_component.h"
 #include "aacdecoder_lib.h"
-#include "audio_player.h"
+#include "audio_renderer.h"
 #include "m4a.h"
+#include "fdk_aac_decoder.h"
 
 #define TAG "fdkaac_decoder"
 

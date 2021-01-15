@@ -13,14 +13,13 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#include "../mad/mad.h"
-#include "../mad/stream.h"
-#include "../mad/frame.h"
-#include "../mad/synth.h"
+#include "mad.h"
+#include "stream.h"
+#include "frame.h"
+#include "synth.h"
 
 #include "driver/i2s.h"
 #include "audio_renderer.h"
-#include "audio_player.h"
 #include "spiram_fifo.h"
 #include "mp3_decoder.h"
 #include "common_buffer.h"
